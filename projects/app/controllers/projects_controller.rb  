@@ -1,0 +1,21 @@
+class ProjectsController < ApplicationController
+
+	def new
+		@project = Project.new
+	end
+	def create
+		@project = Project.new(project_param)
+		if @project.save
+		 redirect_to project_path(@project)
+		else
+			render 'new'
+		end
+	end
+
+	private
+		
+		def project_param
+			params.require(:projects).permit(:name, :description)
+		end
+
+end
